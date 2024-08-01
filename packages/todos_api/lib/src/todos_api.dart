@@ -1,3 +1,4 @@
+import 'package:todos_api/src/models/todo.dart';
 import 'package:todos_api/todos_api.dart';
 
 /// {@template todos_api}
@@ -16,7 +17,6 @@ abstract class TodosApi {
   Future<void> saveTodo(Todo todo);
 
   /// Deletes the `todo` with the given id.
-  ///
   /// If no `todo` with the given id exists, a [TodoNotFoundException] error is
   /// thrown.
   Future<void> deleteTodo(String id);
