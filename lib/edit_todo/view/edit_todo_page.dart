@@ -35,8 +35,15 @@ class EditTodoPage extends StatelessWidget {
   }
 }
 
-class EditTodoView extends StatelessWidget {
+class EditTodoView extends StatefulWidget {
   const EditTodoView({super.key});
+
+  @override
+  State<EditTodoView> createState() => _EditTodoViewState();
+}
+
+class _EditTodoViewState extends State<EditTodoView> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,19 +68,38 @@ class EditTodoView extends StatelessWidget {
         ),
         onPressed: status.isLoadingOrSuccess
             ? null
-            : () => context.read<EditTodoBloc>().add(const EditTodoSubmitted()),
+            : () {
+                print("Save button pressed");
+
+                if (!_formKey.currentState!.validate()) {
+                  return print("Form is valid as now it's being pressed.");
+                }
+                print("calling edit todo submitted");
+                context.read<EditTodoBloc>().add(const EditTodoSubmitted());
+              },
         child: status.isLoadingOrSuccess
             ? const CupertinoActivityIndicator()
             : const Icon(Icons.check_rounded),
       ),
-      body: const CupertinoScrollbar(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: [_TitleField(), _DescriptionField()],
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            _TitleField(
+              validator: (val) {
+                if (val!.isEmpty) {
+                  return 'Title cannot be empty';
+                }
+              },
             ),
-          ),
+            _DescriptionField(
+              validator: (p0) {
+                if (p0!.isEmpty) {
+                  return 'Description cannot be empty';
+                }
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -81,7 +107,11 @@ class EditTodoView extends StatelessWidget {
 }
 
 class _TitleField extends StatelessWidget {
-  const _TitleField();
+  // const _TitleField();
+
+  _TitleField({Key? key, required this.validator}) : super(key: key);
+
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +120,7 @@ class _TitleField extends StatelessWidget {
     final hintText = state.initialTodo?.title ?? '';
 
     return TextFormField(
+      validator: validator,
       key: const Key('editTodoView_title_textFormField'),
       initialValue: state.title,
       decoration: InputDecoration(
@@ -110,7 +141,10 @@ class _TitleField extends StatelessWidget {
 }
 
 class _DescriptionField extends StatelessWidget {
-  const _DescriptionField();
+  // const _DescriptionField();
+  _DescriptionField({Key? key, required this.validator}) : super(key: key);
+
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +154,7 @@ class _DescriptionField extends StatelessWidget {
     final hintText = state.initialTodo?.description ?? '';
 
     return TextFormField(
+      validator: validator,
       key: const Key('editTodoView_description_textFormField'),
       initialValue: state.description,
       decoration: InputDecoration(
