@@ -33,6 +33,18 @@
   "@todosOverviewEmptyText": {
     "description": "Text shown in the Todos Overview Page when no todos are found with the selected filters"
   },
+    "activeTodosOverviewEmptyText": "There are no active todos found.",
+  "@activeTodosOverviewEmptyText": {
+    "description": "Text shown in the Todos Overview Page when no todos are found with the selected filters"
+  },
+  "completedTodosOverviewEmptyText": "There are no completed todos found.",
+  "@completedTodosOverviewEmptyText": {
+    "description": "Text shown in the Todos Overview Page when no todos are found with the selected filters"
+  },
+    "allTodosOverviewEmptyText": "Relax you don't have anything todo.",
+  "@allTodosOverviewEmptyText": {
+    "description": "Text shown in the Todos Overview Page when no todos are found with the selected filters"
+  },
   "todosOverviewTodoDeletedSnackbarText": "Todo \"{todoTitle}\" deleted.",
   "@todosOverviewTodoDeletedSnackbarText": {
     "description": "Snackbar text shown when a todo is deleted from the Todos Overview Page",

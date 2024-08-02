@@ -10,7 +10,7 @@ class Language {
     return <Language>[
       Language(1, "🇫🇷", "French", "fr"),
       Language(2, "🇺🇸", "English", "en"),
-      Language(3, "🇷🇼", "Kinyarwanda", "rw")
+      // Language(3, "🇷🇼", "Kinyarwanda", "rw")
     ];
   }
 }

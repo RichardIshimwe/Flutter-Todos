@@ -85,12 +85,35 @@ class TodosOverviewView extends StatelessWidget {
         ],
         child: BlocBuilder<TodosOverviewBloc, TodosOverviewState>(
           builder: (context, state) {
-            if (state.todos.isEmpty) {
+            if (state.todos.isEmpty || state.filteredTodos.isEmpty) {
               if (state.status == TodosOverviewStatus.loading) {
                 return const Center(child: CupertinoActivityIndicator());
               } else if (state.status != TodosOverviewStatus.success) {
                 return const SizedBox();
               } else {
+                if (state.filter == TodosViewFilter.all) {
+                  return Center(
+                    child: Text(
+                      l10n.allTodosOverviewEmptyText,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  );
+                } else if (state.filter == TodosViewFilter.activeOnly) {
+                  return Center(
+                    child: Text(
+                      l10n.activeTodosOverviewEmptyText,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  );
+                } else if (state.filter == TodosViewFilter.completedOnly) {
+                  return Center(
+                    child: Text(
+                      l10n.completedTodosOverviewEmptyText,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  );
+                }
+
                 return Center(
                   child: Text(
                     l10n.todosOverviewEmptyText,
