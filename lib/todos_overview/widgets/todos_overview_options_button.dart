@@ -13,7 +13,8 @@ class TodosOverviewOptionsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    final todos = context.select((TodosOverviewBloc bloc) => bloc.state.todos);
+    final todos =
+        context.select((TodosOverviewBloc bloc) => bloc.state.filteredTodos);
     final hasTodos = todos.isNotEmpty;
     final completedTodosAmount = todos.where((todo) => todo.isCompleted).length;
 
