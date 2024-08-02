@@ -1,9 +1,10 @@
 {
   "@@locale": "en",
-  "todosOverviewAppBarTitle": "Flutter Todos",
+  "todosOverviewAppBarTitle": "Todo App",
   "@todosOverviewAppBarTitle": {
     "description": "Title text shown in the AppBar of the Todos Overview Page"
   },
+  
   "todosOverviewFilterTooltip": "Filter",
   "@todosOverviewFilterTooltip": {
     "description": "Tooltip text shown in the filter dropdown of the Todos Overview Page"
